@@ -5,6 +5,7 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
+    Redirect
 } from "react-router-dom";
 
 export const AppRouters = () => {
@@ -15,6 +16,8 @@ export const AppRouters = () => {
 
                     <Route path="/auth"  component={ AuthRouters } />
                     <Route exact path="/"  component={ JournalScreen } />
+
+                    <Redirect to="/auth/login" />
 
                 </Switch>
             </div>
