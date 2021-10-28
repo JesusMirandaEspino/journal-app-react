@@ -1,24 +1,41 @@
-import React from 'react'
+import React from 'react';
+import { Link } from "react-router-dom";
 
 export const LoginScreen = () => {
     return (
         <div>
-            <h1>LoginScreen</h1>
+            <h1 className="auth__title" >LoginScreen</h1>
 
             <form>
 
                 <label for="email" >E-mail</label>
-                <input  type="text"  name="email"  placeholder="correo@dom.com"/>
+                <input className="auth__input" type="text"  name="email"  placeholder="correo@dom.com"/>
 
-                <label for="password" >E-mail</label>
-                <input  type="password"  name="password"  placeholder="password"/>
+                <label for="password" >Password</label>
+                <input className="auth__input" type="password"  name="password"  placeholder="password"/>
 
                 <button type="submit" > Login </button>
 
 
                 <hr />
+                
+                <div  className="auth__social_network" >
+                    <h2>Login With Social Network</h2>
 
-                <h2>Google</h2>
+                        <div 
+                            className="google-btn">
+                            <div className="google-icon-wrapper">
+                                <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="google button" />
+                            </div>
+                            <p className="btn-text">
+                                <b>Sign in with google</b>
+                            </p>
+                        </div>
+                </div>
+
+
+                <Link to="/auth/register" >Create new account</Link>
+
 
             </form>
 
