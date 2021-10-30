@@ -14,7 +14,7 @@ export const LoginScreen = () => {
                 <label for="password" >Password</label>
                 <input className="auth__input" type="password"  name="password"  placeholder="password"/>
 
-                <button type="submit" > Login </button>
+                <button type="submit" className="btn btn-primary btn-block"  > Login </button>
 
 
                 <hr />
