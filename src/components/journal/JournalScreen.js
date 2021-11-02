@@ -1,6 +1,7 @@
 import React from 'react';
 import { Sidebar } from './Sidebar';
-import { NothingSeleted } from './NothingSeleted';
+// en proceso import { NothingSeleted } from './NothingSeleted';
+import { NoteScreen } from '../notes/NoteScreen';
 
 export const JournalScreen = () => {
     return (
@@ -11,7 +12,9 @@ export const JournalScreen = () => {
 
             <main>
 
-                <NothingSeleted />
+                {/* <NothingSeleted /> */}
+
+                <NoteScreen />
 
             </main>
 
