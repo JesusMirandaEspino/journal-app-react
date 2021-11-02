@@ -13,3 +13,48 @@
     color:white;
     padding:  10px 20px;
 }
+
+
+.notes__content{
+    display: flex;
+    flex-direction: column;
+    height:100vh;
+    padding:20px;
+}
+
+label{
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-size: 30px;
+}
+
+.notes__title-input, .note__textarea{
+    border: none;
+
+
+    &:focus{
+        outline: none;
+    }
+}
+
+.notes__title-input{
+    color:$dark-grey;
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.note__textarea{
+    border-radius: 6px;
+    color: $dark-grey;
+    flex: 1 1 auto;
+    resize: none;
+    font-size: 20px;
+
+}
+
+.notes__image img{
+    box-shadow:5px 5px $dark-grey;
+    height:150px;
+    border-radius: 6px;
+}
