@@ -21,7 +21,7 @@ export const RegisterScreen = () => {
         e.preventDefault();
         
         if( isFormvalid() ){
-            console.log( 'Formulario correcto wewe' );
+            console.log( 'Formulario correcto' );
          }
     }
 
