@@ -8,7 +8,7 @@ const initialState = {
 };
 
 
-export const uiReducer = ( useState = initialState, action ) => {
+export const uiReducer = ( state = initialState, action ) => {
 
     switch( action.type ){
 
