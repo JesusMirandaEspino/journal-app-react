@@ -1,7 +1,7 @@
 import { getAuth, signInWithPopup, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword  } from 'firebase/auth';
 import { googleAuthProvider} from '../firebase/firebaseConfig';
 import { types } from '../types/types';
-
+import { startLoading, finishLoading } from '../actions/ui';
 
 
 
@@ -9,16 +9,20 @@ import { types } from '../types/types';
 export const startLoginEmailpassword = ( email, password ) => {
     return (dispatch) => {
 
+        dispatch( startLoading() );
+
         const auth = getAuth();
 
             signInWithEmailAndPassword(auth, email, password)
             .then(({user}) => {
-                dispatch(
-                    login( user.uid, user.displayName )
-                );
+
+                dispatch( login( user.uid, user.displayName ) );
+
+                dispatch( finishLoading() );
             })
             .catch((error) => {
                 console.log(error);
+                dispatch( finishLoading() );
             });
 
        // detenido setTimeout( dispatch( login( 12345, 'Jesus' ) ), 3500 );
