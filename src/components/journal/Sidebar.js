@@ -3,6 +3,7 @@ import { JournalEntries } from './JournalEntries';
 import { useDispatch } from 'react-redux';
 import { startLogout } from '../../actions/auth';
 
+
 export const Sidebar = () => {
 
     const dispatch = useDispatch( );
