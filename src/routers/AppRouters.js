@@ -4,7 +4,7 @@ import { JournalScreen } from '../components/journal/JournalScreen';
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
+    //  Not use Route,
     Redirect
 } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
