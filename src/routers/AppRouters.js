@@ -12,6 +12,8 @@ import { useDispatch } from 'react-redux';
 import { login } from '../actions/auth';
 import { PrivateRouter } from './PrivateRouter';
 import { PublicRoute } from './PublicRoute';
+import { loadNotes } from '../helpers/loadNote';
+import { setNotes } from '../actions/notes';
 
 export const AppRouters = () => {
 
@@ -22,11 +24,17 @@ export const AppRouters = () => {
 
     useEffect(() => {
         const auth = getAuth();
-        onAuthStateChanged(auth, (user) =>{
+
+        onAuthStateChanged(auth, async (user) =>{
 
             if( user?.uid ){
                 dispatch( login( user.uid, user.displayName ) );
                 setIsloggedIn( true );
+
+                const notes = await loadNotes(  user.uid );
+
+                dispatch(  setNotes(notes) );
+
             }else{
                 setIsloggedIn( false );
             }
