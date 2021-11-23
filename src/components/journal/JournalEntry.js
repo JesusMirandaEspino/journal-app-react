@@ -1,17 +1,20 @@
 import React from 'react'
 
-export const JournalEntry = () => {
+export const JournalEntry = ({ id, date, title, body, url  }) => {
     return (
         <div className="journal__entry pointer">
 
-            <div className="journal__entry-picture"  style={ { backgroundSize: 'cover', backgroundImage:'url(https://midu.dev/images/wallpapers/javascript-grande-horizontal-4k.png)' } }>
-
+            { url &&
+                <div className="journal__entry-picture"  style={ { backgroundSize: 'cover', backgroundImage:`${url}`
+                } }
+                >
             </div>
+            }
 
             <div className="journal__entry-body" >
 
-                <p className="journal__entry-title" > Nuevo entry </p>
-                <p className="journal__entry-content" > -**************************    </p>
+                <p className="journal__entry-title" > { title } </p>
+                <p className="journal__entry-content" > { body }   </p>
 
             </div>
 
