@@ -1,9 +1,12 @@
 import React, { useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { NotesAppBar } from './NotesAppBar';
 import { useForm } from '../../hooks/useForm';
+import { activeNote } from '../../actions/notes'
 
 export const NoteScreen = () => {
+
+    const dispatch = useDispatch( );
 
     const { active: note } = useSelector( state => state.notes );
 
@@ -13,12 +16,18 @@ export const NoteScreen = () => {
 
     const activeId = useRef(  note.id );
 
+
     useEffect(() => {
         if( note.id !== activeId.current ){
             reset( note );
             activeId.current = note.id;
         }
-    }, [ note, reset ])
+    }, [ note, reset ]);
+
+
+    useEffect(() => {
+        dispatch( activeNote(  formValues.id, { ...formValues } ) );
+    }, [formValues, dispatch]);
 
     return (
         <div className="note__main-content" >
@@ -27,8 +36,8 @@ export const NoteScreen = () => {
 
             <div className="notes__content" >
                 <label htmlFor="title">Title</label>
-                <input  types="text" className="notes__title-input" placeholder="Some Awasome Title" value={ title } onChange={ handleInputChange } />
-                <textarea  className="note__textarea" placeholder="What happened today"  value={ body } onChange={ handleInputChange } ></textarea>
+                <input  types="text" className="notes__title-input" name="title" placeholder="Some Awasome Title" value={ title } onChange={ handleInputChange } />
+                <textarea  className="note__textarea" placeholder="What happened today"  name="body" value={ body } onChange={ handleInputChange } ></textarea>
 
                 { (note.url) &&
                     <div className="notes__image" >
