@@ -42,6 +42,8 @@ export const startLoadNotes = ( uid ) => {
     }
 }
 
+// react-journal
+
 export const startSaveNotes = ( note ) => {
 
     return async( dispatch, getState ) => {
