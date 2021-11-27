@@ -41,7 +41,7 @@ export const NoteScreen = () => {
 
                 { (note.url) &&
                     <div className="notes__image" >
-                    <img  src=""  alt="img" />
+                    <img  src={ formValues.url }  alt="img" />
                 </div>
                 }
 

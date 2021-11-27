@@ -2,7 +2,8 @@ import { db } from '../firebase/firebaseConfig';
 import { collection, addDoc, doc, updateDoc } from 'firebase/firestore';
 import { types } from '../types/types';
 import { loadNotes } from '../helpers/loadNote';
-
+import {  fileUpload } from '../helpers/fileUpload';
+import Swal from 'sweetalert2'
 
 export const startNewNote = () => {
     return async ( dispatch, getState ) => {
@@ -78,11 +79,24 @@ export const refreshNote = ( id, note ) => ({
 
 
 export const startUploading = ( file ) => {
-    return ( dispatch, getState ) => {
+    return async ( dispatch, getState ) => {
         const { active: activeNote } = getState().notes;
 
-        console.log( activeNote );
-        console.log( file );
+        Swal.fire({
+            title: 'Uploading...',
+            text: 'Plase Wait',
+            allowOutsideClick: false,
+            onBeforeOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
+        const fileUrl = await fileUpload( file );
+        activeNote.url = fileUrl;
+
+        dispatch( startSaveNotes( activeNote ) );
+
+        Swal.close();
     }
 }
 
