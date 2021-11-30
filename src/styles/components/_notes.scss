@@ -58,3 +58,13 @@ label{
     height:150px;
     border-radius: 6px;
 }
+
+
+.btn-danger{
+    background-color:red;
+    transition: background-color ease 3s ;
+
+    &:hover{
+        background-color: darken($color:red, $amount:10);
+    }
+}

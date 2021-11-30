@@ -29,6 +29,11 @@ export const NoteScreen = () => {
         dispatch( activeNote(  formValues.id, { ...formValues } ) );
     }, [formValues, dispatch]);
 
+
+    const  handleDelete = () => {
+        // dispatch();
+    };
+
     return (
         <div className="note__main-content" >
 
@@ -46,6 +51,9 @@ export const NoteScreen = () => {
                 }
 
             </div>
+
+
+        <button className="btn btn-danger"  onClick={  handleDelete } >Delete</button>
 
         </div>
     )

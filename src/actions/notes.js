@@ -1,5 +1,5 @@
 import { db } from '../firebase/firebaseConfig';
-import { collection, addDoc, doc, updateDoc } from 'firebase/firestore';
+import { collection, addDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { types } from '../types/types';
 import { loadNotes } from '../helpers/loadNote';
 import {  fileUpload } from '../helpers/fileUpload';
@@ -100,3 +100,15 @@ export const startUploading = ( file ) => {
     }
 }
 
+
+export const startDeleting = ( id ) => {
+    return async ( dispatch, getState ) => {
+
+        const uid = getState().auth.uid;
+        const noteRef = doc(db, `${uid}/journal/notes/${id}`)
+        await deleteDoc(noteRef);
+
+        dispatch(deleteNote(id));
+
+    }
+}
