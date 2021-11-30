@@ -82,6 +82,7 @@ export const startUploading = ( file ) => {
     return async ( dispatch, getState ) => {
         const { active: activeNote } = getState().notes;
 
+
         Swal.fire({
             title: 'Uploading...',
             text: 'Plase Wait',
@@ -112,3 +113,9 @@ export const startDeleting = ( id ) => {
 
     }
 }
+
+
+export const deleteNote = (id) => ({
+    type: types.notesDelete,
+    payload: id
+});
