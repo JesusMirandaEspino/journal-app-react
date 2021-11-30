@@ -19,8 +19,20 @@ export const startNewNote = () => {
 
         dispatch(  activeNote( doc.id, newNote ) );
 
+        dispatch( adddNewNote( doc.id, newNote ) );
+
     };
 }
+
+
+export const adddNewNote = ( id, note ) => ({
+    type: types.notesAddNote,
+    payload: {
+        id,
+        ...note
+    }
+});
+
 
 export const activeNote = ( id, note ) => ({
     type: types.notesActive,
