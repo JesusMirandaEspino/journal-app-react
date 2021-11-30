@@ -3,6 +3,7 @@ import { getAuth, signInWithPopup, createUserWithEmailAndPassword, updateProfile
 import { googleAuthProvider} from '../firebase/firebaseConfig';
 import { types } from '../types/types';
 import { startLoading, finishLoading } from '../actions/ui';
+import { noteLougout } from './notes';
 
 
 
@@ -60,7 +61,7 @@ export const startGoogleLogin = () =>{
         const auth = getAuth();
         signInWithPopup(auth, googleAuthProvider)
             .then( ({user}) =>{
-                
+
                 dispatch(login(user.uid, user.displayName))
             });
     }
@@ -85,6 +86,7 @@ export const startLogout = () => {
         await auth.signOut();
 
         dispatch( logout() );
+        dispatch( noteLougout() );
 
     }
 };
