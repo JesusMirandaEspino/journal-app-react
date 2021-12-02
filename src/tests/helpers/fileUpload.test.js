@@ -33,7 +33,7 @@ describe( 'Pruebas en fileUpload', () => {
         const imgId = segments[ segments.length -1 ].replace( '.jpg', '' );
 
         await cloudinary.v2.api.delete_resources(`${folderName}/${imgId}`, {},  () => {
-            //done();
+            //Don't use done();
         });
 
     });
