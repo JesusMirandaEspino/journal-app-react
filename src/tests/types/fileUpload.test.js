@@ -1,5 +1,16 @@
 import { fileUpload } from '../../helpers/fileUpload';
 
+
+import  cloudinary from 'cloudinary';
+
+cloudinary.config({
+    cloud_name: 'eternoagradecido',
+    api_key: '756413499761247',
+    api_secret: 'GKtuJzOPCC2O4coNykBOZyAcarM',
+    secure: true
+});
+
+
 describe( 'Pruebas en fileUpload', () => {
 
 
@@ -13,6 +24,18 @@ describe( 'Pruebas en fileUpload', () => {
         const url = await fileUpload( file );
 
         expect( typeof url ).toBe('string');
+
+        //Borrar Imagen
+        const segments = url.split('/');
+
+        const folderName = "nombrecarpeta";
+
+        const imgId = segments[ segments.length -1 ].replace( '.jpg', '' );
+
+        await cloudinary.v2.api.delete_resources(`${folderName}/${imgId}`, {},  () => {
+            //done();
+        });
+
     });
 
 
