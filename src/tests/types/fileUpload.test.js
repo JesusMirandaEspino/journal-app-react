@@ -13,12 +13,21 @@ describe( 'Pruebas en fileUpload', () => {
         const url = await fileUpload( file );
 
         expect( typeof url ).toBe('string');
-
-
     });
 
 
 
+    test('Debe de retonar un error ', async () => {
+
+
+        const file = new File( [], 'foto.png' );
+
+        const url = await fileUpload( file );
+
+        expect( url ).toBe(null);
+
+
+    });
 
 
 });
