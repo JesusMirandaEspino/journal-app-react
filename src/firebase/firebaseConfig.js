@@ -16,8 +16,27 @@ const firebaseConfig = {
 };
 
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+
+const firebaseConfigTesting = {
+    apiKey: "AIzaSyDBHO4znF-FUFcD2DUdXaA2LqGxC2a-s9A",
+    authDomain: "pruebagimnasio-9eef2.firebaseapp.com",
+    databaseURL: "https://pruebagimnasio-9eef2.firebaseio.com",
+    projectId: "pruebagimnasio-9eef2",
+    storageBucket: "pruebagimnasio-9eef2.appspot.com",
+    messagingSenderId: "139676948687",
+    appId: "1:139676948687:web:6899661f2df67fe8dfffba",
+    measurementId: "G-9BJ3DDJJPY"
+};
+
+
+if( process.env.NODE_ENV === 'test'){
+    initializeApp(firebaseConfigTesting);
+}else{
+    // Initialize Firebase
+    initializeApp(firebaseConfig);
+}
+
+
 
 const db = getFirestore();
 
@@ -26,7 +45,5 @@ const googleAuthProvider = new GoogleAuthProvider();
 export{
     db,
     googleAuthProvider,
-    app,
     firebaseConfig
-
 }
