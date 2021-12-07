@@ -1,25 +1,32 @@
 
 /*jslint es6 */
-import { startNewNote } from '../../actions/notes'; //ES6 modules
+import { startNewNote, startLoadNotes } from '../../actions/notes'; //ES6 modules
 import configureStore from 'redux-mock-store'; //ES6 modules
 import thunk from 'redux-thunk';
 
 
 import { db } from '../../firebase/firebaseConfig';
-import { disableNetwork } from "firebase/firestore"; 
+import { disableNetwork } from "firebase/firestore";
 import { types } from '../../types/types';
 import { doc, deleteDoc } from "@firebase/firestore";
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
-const store = mockStore({
+const initState = {
     auth: {
         uid: 'TESTING'
     }
-});
+};
+
+
+let store = mockStore(initState);
 
 describe('Pruebas con las acciontes con notes', () => {
+
+    beforeEach( () => {
+        store = mockStore(initState);
+    } );
 
     afterAll(() => { disableNetwork(db); });
 
@@ -52,6 +59,29 @@ describe('Pruebas con las acciontes con notes', () => {
         const docId = actions[0].payload.id;
         const noteRef = doc(db, `/TESTING/journal/notes/${docId}`);
         await deleteDoc(noteRef);
+
+    });
+
+
+    test( 'startLoadNotes Debe de cargar las notas', async() => {
+        await store.dispatch( startLoadNotes('TESTING') );
+
+        const actions = getActions();
+
+        expect( actions ).toEqual({
+            type: types.notesLoad,
+            payload: expect.any( Array )
+        });
+
+
+        const expeted = {
+            id: expect.any(String),
+            title: expect.any(String),
+            body: expect.any(String),
+            date: expect.any(Number),
+        }
+
+        expect( actions[0].payload[0] ).toMatchObject( expeted );
 
     });
 
