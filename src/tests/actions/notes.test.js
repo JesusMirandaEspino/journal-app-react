@@ -1,6 +1,6 @@
 
 /*jslint es6 */
-import { startNewNote, startLoadNotes } from '../../actions/notes'; //ES6 modules
+import { startNewNote, startLoadNotes, startSaveNotes } from '../../actions/notes'; //ES6 modules
 import configureStore from 'redux-mock-store'; //ES6 modules
 import thunk from 'redux-thunk';
 
@@ -82,6 +82,27 @@ describe('Pruebas con las acciontes con notes', () => {
         }
 
         expect( actions[0].payload[0] ).toMatchObject( expeted );
+
+    });
+
+
+    test( 'startSaveNotes Debe de guardar la nota', async() => {
+        const note = {
+            id: '9drCcumDOfPZwcURhICN',
+            title: 'titulo',
+            body: 'body'
+            }
+
+            await store.dispatch(  startSaveNotes(note) );
+
+            const actions = store.getActions();
+
+            exxpect( actions  ).toBe( types.notesUpdate );
+
+            const docRef = await db.doc(`/TESTING/journal/notes/${node.id}`  ).get();
+
+            expect( docRef.data().title ).toBe( note.title );
+
 
     });
 
