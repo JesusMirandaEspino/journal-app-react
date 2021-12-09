@@ -1,6 +1,6 @@
 
 /*jslint es6 */
-import { startNewNote, startLoadNotes, startSaveNotes } from '../../actions/notes'; //ES6 modules
+import { startNewNote, startLoadNotes, startSaveNotes, startUploading } from '../../actions/notes'; //ES6 modules
 import configureStore from 'redux-mock-store'; //ES6 modules
 import thunk from 'redux-thunk';
 
@@ -9,6 +9,14 @@ import { db } from '../../firebase/firebaseConfig';
 import { disableNetwork } from "firebase/firestore";
 import { types } from '../../types/types';
 import { doc, deleteDoc } from "@firebase/firestore";
+
+import { fileUpload } from '../../helpers/fileUpload';
+
+jest.mock( '../../helpers/fileUpload', () => ({
+    fileUpload: jest.fn( () => {
+        return 'https//hola-mundo.com/foto.jpg';
+    })
+}));
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -105,5 +113,19 @@ describe('Pruebas con las acciontes con notes', () => {
 
 
     });
+
+
+    test( 'Debe de actualiar el url del entry', async() => {
+
+
+            const file = [];
+            await store.dispatch(startUploading( file ));
+
+            const docRef = doc(db, `TESTING`, `journal/notes/vuGrjFroGH1P6KZoHnPS`);
+            const docSnap = await getDoc(docRef);
+
+            expect(docSnap.data().url).toBe('https://hola-mundo.com/cosa.jpg');
+
+    } );
 
 });
