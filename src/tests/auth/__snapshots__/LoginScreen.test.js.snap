@@ -11,7 +11,7 @@ exports[`Pruebas con loginScreen Pruebas en <LoginScreen /> 1`] = `
     onSubmit={[Function]}
   >
     <label
-      for="email"
+      htmlFor="email"
     >
       E-mail
     </label>
