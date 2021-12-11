@@ -48,7 +48,7 @@
     ]
   },
   "devDependencies": {
-    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.5",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.6",
     "cloudinary": "^1.27.1",
     "enzyme-to-json": "^3.6.2"
   }

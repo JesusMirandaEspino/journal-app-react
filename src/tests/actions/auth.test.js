@@ -66,7 +66,7 @@ describe( 'Pruebas con auth', () => {
 
         const actions = store.getActions();
 
- 
+
 
         expect(  actions[1] ).toEqual({
             type: types.login,

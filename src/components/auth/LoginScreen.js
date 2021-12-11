@@ -33,7 +33,7 @@ export const LoginScreen = () => {
 
             <form onSubmit={ handleLogin } >
 
-                <label for="email" >E-mail</label>
+                <label htmlFor="email" >E-mail</label>
                 <input className="auth__input" type="text"  name="email"  placeholder="correo@dom.com" value={ email } onChange={ handleInputChange } />
 
                 <label for="password" >Password</label>
