@@ -15,7 +15,7 @@ export const startLoginEmailpassword = ( email, password ) => {
 
         const auth = getAuth();
 
-            signInWithEmailAndPassword(auth, email, password)
+            return  signInWithEmailAndPassword(auth, email, password)
             .then(({user}) => {
 
                 dispatch( login( user.uid, user.displayName ) );

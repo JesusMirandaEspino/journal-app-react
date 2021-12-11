@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 
 import '@testing-library/jest-dom';
 
-import { login, logout, startLogout } from '../../actions/auth';
+import { login, logout, startLogout, startLoginEmailpassword } from '../../actions/auth';
 import { types } from '../../types/types';
 
 
@@ -56,6 +56,24 @@ describe( 'Pruebas con auth', () => {
 
         expect( actions[1] ).toEqual({
             type: types.notesLogoutCleaning
+        });
+
+    });
+
+
+    test('Debe de iniciar el startLoginEmailpassword', async() => {
+        await store.dispatch( startLoginEmailpassword('testing@testing.com', '123456') );
+
+        const actions = store.getActions();
+
+ 
+
+        expect(  actions[1] ).toEqual({
+            type: types.login,
+            payload: {
+                uid: 'As8ugo0IJmUiVibOMaezftLHE3n1',
+                displaName: null
+            }
         });
 
     });
