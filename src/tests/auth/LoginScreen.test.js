@@ -7,11 +7,12 @@ import { Provider } from 'react-redux';
 import  thunk  from 'redux-thunk';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
-import { startGoogleLogin } from '../../actions/auth';
+import { startGoogleLogin, startLoginEmailpassword  } from '../../actions/auth';
 
 
 jest.mock( '../../actions/auth', () => ({
-    startGoogleLogin: jest.fn()
+    startGoogleLogin: jest.fn(),
+    startLoginEmailpassword: jest.fn()
 }));
 
 const middleware = [thunk];
@@ -63,6 +64,17 @@ describe( 'Pruebas con loginScreen', () => {
 
     });
 
+
+    test('Debe de disparar el start login con los respectivos argumentos', () => {
+        wrapper.find( 'form' ).prop('onSubmit')({
+            preventDefault(){}
+        });
+
+        expect( startLoginEmailpassword ).toHaveBeenCalled();
+
+        // startLoginEmailpassword
+
+    });
 
 
 });
