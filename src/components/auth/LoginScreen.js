@@ -36,7 +36,7 @@ export const LoginScreen = () => {
                 <label htmlFor="email" >E-mail</label>
                 <input className="auth__input" type="text"  name="email"  placeholder="correo@dom.com" value={ email } onChange={ handleInputChange } />
 
-                <label for="password" >Password</label>
+                <label htmlFor="password" >Password</label>
                 <input className="auth__input" type="password"  name="password"  placeholder="password"  value={ password } onChange={ handleInputChange } />
 
                 <button type="submit" className="btn btn-primary btn-block" disabled={ loading } > Login </button>

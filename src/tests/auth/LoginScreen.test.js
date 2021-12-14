@@ -7,6 +7,12 @@ import { Provider } from 'react-redux';
 import  thunk  from 'redux-thunk';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
+import { startGoogleLogin } from '../../actions/auth';
+
+
+jest.mock( '../../actions/auth', () => ({
+    startGoogleLogin: jest.fn()
+}));
 
 const middleware = [thunk];
 const mockstore = configureStore( middleware );
@@ -22,15 +28,7 @@ const initialState = {
 };
 
 let store = mockstore( initialState );
-
-describe( 'Pruebas con loginScreen', () => {
-
-    beforeEach( () => {
-        store = mockstore( initialState );
-    });
-
-
-    test( 'Pruebas en <LoginScreen />', () => {
+store.dispatch = jest.fn();
 
         const wrapper = mount(
 
@@ -41,7 +39,27 @@ describe( 'Pruebas con loginScreen', () => {
         </Provider>
 
         );
+
+
+describe( 'Pruebas con loginScreen', () => {
+
+    beforeEach( () => {
+        store = mockstore( initialState );
+    });
+
+
+    test( 'Pruebas en <LoginScreen />', () => {
+
+
         expect( wrapper ).toMatchSnapshot();
+
+    });
+
+
+    test('Debe de disparar la autentificacion con google', () => {
+        wrapper.find( '.google-btn' ).prop('onClick')();
+
+        expect( startGoogleLogin ).toHaveBeenCalled();
 
     });
 

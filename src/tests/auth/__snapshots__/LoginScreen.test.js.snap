@@ -24,7 +24,7 @@ exports[`Pruebas con loginScreen Pruebas en <LoginScreen /> 1`] = `
       value="correo45@gmail.com"
     />
     <label
-      for="password"
+      htmlFor="password"
     >
       Password
     </label>
