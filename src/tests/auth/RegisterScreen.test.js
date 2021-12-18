@@ -69,4 +69,33 @@ describe( 'Pruebas con <RegisterScreen />', () => {
     });
 
 
+    test('Debe de mostrar la caja de alerta con el error', () => {
+
+        const initialState = {
+            auth: {},
+            ui: {
+                loading: false,
+                msgError: 'Email no es correcto'
+            }
+        };
+
+        let store = mockstore( initialState );
+
+        const wrapper = mount(
+
+            <Provider store={ store } >
+                <MemoryRouter>
+                    <RegisterScreen />
+                </MemoryRouter>
+            </Provider>
+
+            );
+
+
+            expect( wrapper.find('.auth__alert_error').exists() ).toBe(true);
+            expect( wrapper.find('.auth__alert_error').text().trim() ).toBe( initialState.ui.msgError );
+
+    });
+
+
 });
