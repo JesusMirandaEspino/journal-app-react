@@ -3,7 +3,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from 'firebase/firestore';
 import { GoogleAuthProvider } from 'firebase/auth';
-
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 // Firebase configuration
 const firebaseConfig = {
@@ -45,5 +45,6 @@ const googleAuthProvider = new GoogleAuthProvider();
 export{
     db,
     googleAuthProvider,
-    firebaseConfig
+    firebaseConfig,
+    firebaseConfigTesting
 }

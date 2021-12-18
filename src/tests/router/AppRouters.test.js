@@ -9,8 +9,21 @@ import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 import { AppRouters } from '../../routers/AppRouters';
 import { act } from '@testing-library/react';
-import { firebaseConfig, firebaseConfigTesting } from "../../firebase/firebaseConfig";
+import { firebaseConfig, firebaseConfigTesting, db } from "../../firebase/firebaseConfig";
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
+const user = {uid: 123456, displayName: "Jesus", email: 'correo@gmail.com'};
+const authMock = {
+    firebase: {
+        auth: () => ({
+            signOut: jest.fn(),
+            signInWithEmailAndPassword: jest.fn( () => Promise.resolve({user})  ),
+            onAuthStateChanged: jest.fn( (callback) => callback(user))
+        })
+    }
+};
+
+jest.mock('../../firebase/firebase-config', () => (authMock));
 
 import { login  } from '../../actions/auth';
 
@@ -18,6 +31,8 @@ jest.mock( '../../actions/auth', () => ({
     login: jest.fn(),
 
 }));
+
+const authF = getAuth();
 
 const middleware = [thunk];
 const mockstore = configureStore( middleware );
@@ -29,6 +44,12 @@ const initialState = {
     ui: {
         loading: false,
         msgError: null
+    },
+    notes: {
+        active: {
+            id: '1234656',
+        },
+        notes: []
     }
 };
 
@@ -40,7 +61,10 @@ describe( 'Pruebas con <AppRouters />', () => {
 
     test( 'Debe de mostrar el router si estoy autenticado', async() => {
 
-        const useCard = await firebaseConfig.auth.signInWithEmailAndPassword('testing@testing.com', '123456');
+        let user;
+
+        const useCard = await authMock();
+        user = useCard;
 
         await act( async () => {
             const wrapper = mount(
@@ -53,6 +77,7 @@ describe( 'Pruebas con <AppRouters />', () => {
             );
         });
 
+        expect( login ).toHaveBeenCalled(  );
 
 
     });
