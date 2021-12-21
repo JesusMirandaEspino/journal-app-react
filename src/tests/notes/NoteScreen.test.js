@@ -1,24 +1,22 @@
+
 import React from 'react';
 import { Sidebar } from '../../components/journal/Sidebar';
-
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import  configureStore  from 'redux-mock-store';
 import {configure,  mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import  thunk  from 'redux-thunk';
 import '@testing-library/jest-dom';
-import { startLogout  } from '../../actions/auth';
-import { startNewNote } from '../../actions/notes';
 
+import  { activeNote } from '../../actions/notes';
+import { NoteScreen } from '../../components/notes/NoteScreen';
 
-
-jest.mock( '../../actions/auth', () => ({
-    startLogout: jest.fn(),
-}));
 
 jest.mock( '../../actions/notes', () => ({
-    startNewNote: jest.fn(),
+    activeNote: jest.fn(),
 }));
+
+
 
 
 const middleware = [thunk];
@@ -36,7 +34,12 @@ const initialState = {
         msgError: null
     },
     notes: {
-        active: null,
+        active: {
+            id: 123456,
+            title: 'Mundo',
+            body: 'Hola',
+            date: 0
+        },
         notes: []
     }
 };
@@ -47,34 +50,20 @@ store.dispatch = jest.fn();
         const wrapper = mount(
 
         <Provider store={ store } >
-                <Sidebar />
+                <NoteScreen />
         </Provider>
 
         );
 
-describe('Pruebas con <sidebar />', () => {
+describe('Pruebas en <NoteScreen />', () => {
 
-    test( 'Debe de mostrarse correctamente', () => {
-
+    test( 'Debe mostrarse Correctamente', () => {
 
         expect( wrapper ).toMatchSnapshot();
 
     });
 
 
-    test( 'Debe de hacer el startLogout', () => {
 
-        wrapper.find( 'button' ).prop( 'onClick' )();
-
-        expect( startLogout ).toHaveBeenCalled();
-    });
-
-
-    test('Debe de llamar el startNewNote', () => {
-
-        wrapper.find( '.journal__new-entry' ).prop( 'onClick' )();
-
-        expect( startNewNote ).toHaveBeenCalled();
-    });
 
 });
