@@ -64,6 +64,19 @@ describe('Pruebas en <NoteScreen />', () => {
     });
 
 
+    test( 'Debe de disparar el activeNote', () => {
+
+        wrapper.find('input[name="title"]').simulate( 'change', {
+            target: {
+                name: 'title',
+                value: 'Hola de nuevo'
+            }
+        });
+
+        expect( activeNote ).toHaveBeenCalled();
+
+    });
+
 
 
 });
